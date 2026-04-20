@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NIT Hostel Management - Login</title>
+  <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="responsive.css">
+    <script>
+        // Force reload if page is loaded from back/forward cache
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        });
+    </script>
+</head>
+
+<body class="auth-page">
+
+  <div class="container">
+
+    <img src="nit_logo.png.jpg" class="logo" alt="NIT Logo">
+    <h2>Login</h2>
+
+    <form method="POST" action="login.php">
+
+      <select name="role" required>
+        <option value="">-- Select Role --</option>
+        <option value="management">Super Admin</option>
+        <option value="admin">Admin</option>
+        <option value="student">Student</option>
+        <option value="hod">HOD</option>
+        <option value="warden">Warden</option>
+      </select>
+
+      <input type="email" name="email" placeholder="Enter Email" required>
+
+      <input type="password" name="password" placeholder="Enter Password" required>
+
+      <button type="submit" name="login">Login</button>
+
+      <?php if(isset($error) && $error != "") echo "<div class='error'>$error</div>"; ?>
+
+    </form>
+
+    <div class="divider"><span>or</span></div>
+
+    <div class="footer">
+      Don't have an account?
+      <a href="signup.php">Sign Up</a>
+    </div>
+
+  </div>
+
+</body>
+
+</html>

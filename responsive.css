@@ -1,0 +1,574 @@
+/* ============================================================
+   responsive.css — Centralized Mobile Responsive Stylesheet
+   NIT Hostel Management System
+   Breakpoints: 768px (tablet), 480px (phone), 375px, 320px
+   ============================================================ */
+
+/* ---------- Global Resets ---------- */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Prevent iOS zoom on input focus */
+input, select, textarea {
+    font-size: 16px;
+}
+
+/* ---------- Sidebar Overlay ---------- */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Prevent background scroll when sidebar is open */
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* ---------- TABLET — max-width: 768px ---------- */
+@media (max-width: 768px) {
+    /* Hamburger Button */
+    .menu-toggle {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        position: absolute !important;
+        top: 50% !important;
+        left: 10px !important;
+        transform: translateY(-50%) !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 5px !important;
+        z-index: 1002;
+    }
+
+    /* Header */
+    header {
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        font-size: 15px !important;
+        padding: 15px 15px 15px 50px !important;
+        text-align: left !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        gap: 8px !important;
+        position: relative;
+        min-height: 60px;
+    }
+
+    header img {
+        width: 40px !important;
+        height: 40px !important;
+        position: static !important;
+        margin-right: 8px;
+        flex-shrink: 0;
+    }
+
+    header .role-badge {
+        font-size: 10px !important;
+        padding: 3px 8px !important;
+        margin-left: 0 !important;
+    }
+
+    /* Dashboard Layout */
+    .dashboard {
+        flex-direction: column !important;
+    }
+
+    /* Sidebar — Off-canvas */
+    .sidebar {
+        position: fixed !important;
+        top: 0 !important;
+        left: -280px !important;
+        width: 260px !important;
+        height: 100% !important;
+        z-index: 1001 !important;
+        transition: left 0.3s ease-in-out !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+        padding-top: 20px !important;
+        padding-bottom: 30px !important;
+        display: block !important;
+    }
+
+    .sidebar.open {
+        left: 0 !important;
+    }
+
+    /* Content Area */
+    .content {
+        padding: 20px 15px !important;
+        margin-top: 0 !important;
+        width: 100% !important;
+        overflow-x: hidden;
+    }
+
+    .content h1 {
+        font-size: 22px !important;
+        word-wrap: break-word;
+    }
+
+    /* Tables */
+    .table-container,
+    [style*="overflow-x: auto"] {
+        width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        margin-top: 15px;
+        border-radius: 8px;
+        padding-bottom: 5px; /* space for scrollbar */
+    }
+
+    /* Make scrollbar visible on mobile so users know they can slide */
+    .table-container::-webkit-scrollbar,
+    [style*="overflow-x: auto"]::-webkit-scrollbar {
+        height: 6px;
+    }
+    .table-container::-webkit-scrollbar-track,
+    [style*="overflow-x: auto"]::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+    .table-container::-webkit-scrollbar-thumb,
+    [style*="overflow-x: auto"]::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 4px;
+    }
+
+    table {
+        min-width: 500px;
+    }
+
+    /* Form Elements — Full Width */
+    select,
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    input[type="date"],
+    input[type="tel"],
+    input[type="file"],
+    textarea {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        margin-bottom: 10px;
+        font-size: 16px !important;
+        min-height: 44px;
+    }
+
+    .form-control {
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Cards — Summary / Stats */
+    .summary-cards {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+
+    .stats-container {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 15px !important;
+    }
+
+    .stat-card {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .card {
+        padding: 16px !important;
+    }
+
+    .card .count {
+        font-size: 26px !important;
+    }
+
+    /* Profile Card */
+    .profile-card {
+        max-width: 100% !important;
+        padding: 20px !important;
+        margin: 15px 0 !important;
+    }
+
+    .profile-info {
+        flex-direction: column !important;
+        gap: 4px !important;
+    }
+
+    .profile-label {
+        width: 100% !important;
+    }
+
+    /* Form Container */
+    .form-container {
+        max-width: 100% !important;
+        padding: 15px !important;
+        margin: 15px 0 !important;
+    }
+
+    /* Buttons — Touch Friendly */
+    button,
+    .btn-submit,
+    .btn-pay,
+    .btn-view,
+    .btn-receipt,
+    .btn-issue,
+    .logout-btn {
+        min-height: 44px;
+        padding: 10px 16px !important;
+        font-size: 14px !important;
+        touch-action: manipulation;
+    }
+
+    /* Modals */
+    .modal-overlay {
+        padding: 15px !important;
+        align-items: center !important;
+    }
+
+    .upi-modal,
+    .crop-box {
+        width: 95% !important;
+        max-width: 400px !important;
+        padding: 20px !important;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    /* Filter Bar */
+    .filter-bar {
+        flex-direction: column !important;
+        align-items: stretch !important;
+    }
+
+    .filter-bar select {
+        width: 100% !important;
+    }
+
+    /* Tabs */
+    .tabs {
+        flex-wrap: wrap !important;
+    }
+
+    .tab {
+        flex: 1 1 auto !important;
+        text-align: center !important;
+        min-width: 0 !important;
+        font-size: 12px !important;
+        padding: 8px 10px !important;
+    }
+
+    /* Alert Boxes */
+    .alert-box .alert-header {
+        flex-direction: column !important;
+        gap: 4px !important;
+    }
+
+    /* Student Details Page — Photo + Content Layout */
+    .details-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    .details-card {
+        padding: 15px !important;
+    }
+
+    .photo-container img,
+    .photo-container div {
+        width: 120px !important;
+        height: 120px !important;
+        margin: 0 auto 15px !important;
+    }
+
+    /* Stack inline flex layouts vertically */
+    [style*="display: flex"][style*="gap: 30px"],
+    [style*="display:flex"][style*="gap:30px"],
+    [style*="justify-content: space-between"],
+    [style*="justify-content:space-between"] {
+        flex-direction: column !important;
+        gap: 15px !important;
+        align-items: flex-start !important;
+    }
+
+    /* Action buttons in detail headers */
+    [style*="display: flex"][style*="gap: 10px"] {
+        flex-wrap: wrap !important;
+    }
+
+    /* Ensure no horizontal overflow on page body */
+    html, body {
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+}
+
+/* ---------- PHONE — max-width: 480px ---------- */
+@media (max-width: 480px) {
+    header {
+        font-size: 14px !important;
+        padding: 10px 10px 10px 50px !important;
+        gap: 6px !important;
+    }
+
+    header img {
+        width: 35px !important;
+        height: 35px !important;
+    }
+
+    .content {
+        padding: 12px 10px !important;
+    }
+
+    .content h1 {
+        font-size: 18px !important;
+    }
+
+    .content p {
+        font-size: 14px;
+    }
+
+    /* Summary Cards — Stack on small phones */
+    .summary-cards {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Tables */
+    table, thead, tbody, th, td, tr {
+        font-size: 12px !important;
+    }
+
+    th, td {
+        padding: 8px 5px !important;
+    }
+
+    /* Stat Cards */
+    .stat-card {
+        padding: 15px !important;
+    }
+
+    .stat-value {
+        font-size: 28px !important;
+    }
+
+    .stat-card h3 {
+        font-size: 12px !important;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        width: 240px !important;
+    }
+
+    .sidebar a {
+        font-size: 13px !important;
+        padding: 9px 10px !important;
+    }
+
+    /* Buttons */
+    .btn-pay,
+    .btn-issue {
+        display: block !important;
+        width: 100% !important;
+        margin: 5px 0 !important;
+        text-align: center !important;
+    }
+
+    /* Modals */
+    .upi-modal,
+    .crop-box {
+        width: 98% !important;
+        padding: 15px !important;
+    }
+
+    .upi-details img {
+        width: 150px !important;
+        height: 150px !important;
+    }
+
+    /* Profile photo in cards */
+    .profile-card img {
+        width: 100px !important;
+        height: 100px !important;
+    }
+
+    /* Card action links */
+    .card a {
+        font-size: 12px !important;
+        padding: 6px 10px !important;
+    }
+}
+
+/* ---------- SMALL PHONE — max-width: 375px ---------- */
+@media (max-width: 375px) {
+    header {
+        padding: 8px 8px 8px 48px !important;
+        font-size: 13px !important;
+    }
+
+    header img {
+        width: 32px !important;
+        height: 32px !important;
+    }
+
+    .menu-toggle {
+        font-size: 22px !important;
+        padding: 6px 10px !important;
+        top: 8px !important;
+        left: 8px !important;
+    }
+
+    .content {
+        padding: 10px 8px !important;
+    }
+
+    .content h1 {
+        font-size: 16px !important;
+    }
+
+    .sidebar {
+        width: 220px !important;
+    }
+
+    .sidebar h2 {
+        font-size: 14px !important;
+    }
+
+    .sidebar a {
+        font-size: 12px !important;
+        padding: 8px !important;
+        margin: 4px 0 !important;
+    }
+
+    /* Cards */
+    .card {
+        padding: 12px !important;
+    }
+
+    .card .count {
+        font-size: 22px !important;
+    }
+
+    .card h3 {
+        font-size: 10px !important;
+    }
+
+    /* Tables */
+    th, td {
+        padding: 6px 3px !important;
+        font-size: 11px !important;
+    }
+}
+
+/* ---------- EXTRA SMALL — max-width: 320px ---------- */
+@media (max-width: 320px) {
+    header {
+        padding: 6px 6px 6px 44px !important;
+        font-size: 12px !important;
+    }
+
+    header img {
+        width: 28px !important;
+        height: 28px !important;
+    }
+
+    .menu-toggle {
+        font-size: 20px !important;
+        padding: 5px 8px !important;
+        top: 6px !important;
+        left: 6px !important;
+    }
+
+    .content h1 {
+        font-size: 15px !important;
+    }
+
+    .sidebar {
+        width: 200px !important;
+    }
+
+    .sidebar a {
+        font-size: 11px !important;
+    }
+
+    .card .count {
+        font-size: 20px !important;
+    }
+
+    button, .btn-submit, .logout-btn {
+        font-size: 13px !important;
+        padding: 8px 12px !important;
+    }
+}
+
+/* ---------- Login / Signup Page Specific ---------- */
+/* These pages use body as flex container with 100vh */
+@media (max-width: 768px) {
+    /* Login & Signup pages: allow scroll when form overflows */
+    body.auth-page {
+        height: auto !important;
+        min-height: 100vh;
+        overflow: auto !important;
+        padding: 20px 0;
+    }
+
+    body.auth-page .container {
+        width: 90% !important;
+        max-width: 380px;
+        padding: 25px 20px !important;
+        margin: 20px auto;
+    }
+
+    body.auth-page .logo {
+        width: 70px !important;
+    }
+
+    body.auth-page select,
+    body.auth-page input {
+        padding: 11px !important;
+        font-size: 15px !important;
+    }
+
+    body.auth-page button {
+        padding: 12px !important;
+        font-size: 15px !important;
+    }
+}
+
+@media (max-width: 375px) {
+    body.auth-page .container {
+        width: 94% !important;
+        padding: 20px 15px !important;
+    }
+
+    body.auth-page .logo {
+        width: 60px !important;
+    }
+
+    body.auth-page h2 {
+        font-size: 18px !important;
+    }
+}

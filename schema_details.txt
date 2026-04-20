@@ -1,0 +1,35 @@
+Table: mess_fees
+id | int
+user_id | int
+student_name | varchar(100)
+college_name | varchar(100)
+department_name | varchar(100)
+month_year | varchar(20)
+amount | decimal(10,2)
+paid_amount | decimal(10,2)
+status | enum('Paid','Pending','Partial')
+payment_id | varchar(255)
+receipt_id | varchar(50)
+paid_at | datetime
+late_fee_added | tinyint(1)
+base_amount | decimal(10,2)
+exemption_reason | text
+exemption_status | enum('None','Pending','Approved','Rejected')
+
+Table: students_info
+id | int
+user_id | int
+student_name | varchar(100)
+college_name | varchar(100)
+department_name | varchar(100)
+room_no | varchar(50)
+academic_year | varchar(50)
+college_type | enum('Polytechnic','Engineering')
+department | varchar(100)
+parent_name | varchar(100)
+parent_mobile | varchar(20)
+student_mobile | varchar(20)
+profile_photo | varchar(255)
+course_type | enum('Engineering','Polytechnic')
+npoly_id | varchar(50)
+

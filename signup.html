@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIT Hostel - Sign Up</title>
+    <link rel="stylesheet" href="signup.css">
+    <link rel="stylesheet" href="responsive.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: url("nit_background.jpg") no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            width: 350px;
+            max-width: 90%;
+            text-align: center;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            width: 90px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(to right, #4a90e2, #357ABD);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .footer {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: #fff;
+            text-decoration: underline;
+        }
+    </style>
+
+<script>
+    window.addEventListener("pageshow", function (event) {
+        if (event.persisted) {
+            window.location.reload();
+        }
+    });
+</script>
+</head>
+
+<body class="auth-page">
+
+    <div class="container">
+
+        <img src="nit_logo.png.jpg" class="logo" alt="NIT Logo">
+        <h2>NIT Hostel Sign Up</h2>
+
+        <?php if(isset($error)): ?>
+            <div style="background: rgba(255, 0, 0, 0.2); border: 1px solid #ff4d4d; color: #ffcccc; padding: 10px; border-radius: 8px; margin-bottom: 15px; font-size: 14px;">
+                <?php echo $error; ?>
+            </div>
+        <?php endif; ?>
+
+        <form method="POST" action="signup.php">
+            <input type="text" name="fullname" placeholder="Full Name" required>
+
+            <input type="email" name="email" placeholder="Email Address" required>
+
+            <input type="password" name="password" placeholder="Password" required>
+
+            <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+
+            <select name="college_type" id="collegeSelect" required onchange="updateDepartments()">
+                <option value="">-- Select College --</option>
+                <?php while($c = $colleges_res->fetch_assoc()): ?>
+                    <option value="<?php echo htmlspecialchars($c['name']); ?>"><?php echo htmlspecialchars($c['name']); ?></option>
+                <?php endwhile; ?>
+            </select>
+
+            <select name="department" id="deptSelect" required>
+                <option value="">-- Select Department --</option>
+            </select>
+
+            <input type="hidden" name="role" value="student">
+
+            <button type="submit" name="signup">Register</button>
+        </form>
+
+        <script>
+            const depts = <?php echo $depts_json; ?>;
+
+            function updateDepartments() {
+                const college = document.getElementById('collegeSelect').value;
+                const deptSelect = document.getElementById('deptSelect');
+                deptSelect.innerHTML = '<option value="">-- Select Department --</option>';
+                
+                if (depts[college]) {
+                    depts[college].forEach(dept => {
+                        const opt = document.createElement('option');
+                        opt.value = dept;
+                        opt.textContent = dept;
+                        deptSelect.appendChild(opt);
+                    });
+                }
+            }
+        </script>
+
+        <div class="footer">
+            Already have an account? <a href="login.php">Login</a>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

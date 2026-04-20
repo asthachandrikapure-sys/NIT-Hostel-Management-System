@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOD Dashboard - NIT Hostel</title>
+    <link rel="stylesheet" href="hod.css">
+    <link rel="stylesheet" href="responsive.css">
+<script>
+    window.addEventListener("pageshow", function (event) {
+        if (event.persisted) {
+            window.location.reload();
+        }
+    });
+</script>
+</head>
+
+<body>
+
+    <header>
+        <img src="nit_logo.png.jpg" alt="NIT Logo">
+        Welcome, <?php echo $_SESSION['username']; ?> (HOD - <?php echo $_SESSION['department_name']; ?>) 👋
+    </header>
+
+    <div class="dashboard">
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <div class="sidebar">
+            <h2>Modules</h2>
+            <a href="hod.php" style="background: #e7f3ea;">Dashboard Home</a>
+            <a href="hod_student_info.php">View Students</a>
+            <a href="hod_gatepass.php">Approve/Reject Gate Pass</a>
+        </div>
+
+        <div class="content">
+            <h1>HOD Dashboard</h1>
+            <p>Manage records for <strong><?php echo $_SESSION['department_name']; ?></strong> (<?php echo $_SESSION['college_name']; ?>).</p>
+
+            <div class="stats-container">
+                <div class="stat-card" onclick="window.location.href='hod_student_info.php'">
+                    <h3>Total Students</h3>
+                    <p class="stat-value"><?php echo $total_students; ?></p>
+                    <span class="stat-link">View All →</span>
+                </div>
+                <div class="stat-card" onclick="window.location.href='hod_gatepass.php'">
+                    <h3>Pending Gate Passes</h3>
+                    <p class="stat-value" style="color: #f44336;"><?php echo $pending_gp; ?></p>
+                    <span class="stat-link">Review Now →</span>
+                </div>
+            </div>
+
+            <button class="logout-btn" onclick="window.location.href='logout.php'">
+                Logout
+            </button>
+        </div>
+
+    </div>
+
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+    <script>
+    function toggleSidebar() {
+        var sidebar = document.querySelector('.sidebar');
+        var overlay = document.getElementById('sidebarOverlay');
+        sidebar.classList.toggle('open');
+        if (overlay) overlay.classList.toggle('active');
+        document.body.classList.toggle('no-scroll');
+    }
+    function closeSidebar() {
+        var sidebar = document.querySelector('.sidebar');
+        var overlay = document.getElementById('sidebarOverlay');
+        sidebar.classList.remove('open');
+        if (overlay) overlay.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+    }
+    document.querySelectorAll('.sidebar a').forEach(function(link) {
+        link.addEventListener('click', closeSidebar);
+    });
+    var overlay = document.getElementById('sidebarOverlay');
+    if (overlay) overlay.addEventListener('click', closeSidebar);
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Principal Dashboard - NIT Hostel</title>
+    <link rel="stylesheet" href="principal.css">
+    <link rel="stylesheet" href="responsive.css">
+<script>
+    window.addEventListener("pageshow", function (event) {
+        if (event.persisted) {
+            window.location.reload();
+        }
+    });
+</script>
+</head>
+
+<body>
+
+    <header>
+        <img src="nit_logo.png.jpg" alt="NIT Logo">
+        Welcome, <?php echo $_SESSION['username']; ?> (Principal - <?php echo $_SESSION['college_type']; ?>) 👋
+    </header>
+
+    <div class="dashboard">
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <div class="sidebar">
+            <h2>Modules</h2>
+            <a href="principal_student_info.php">View All Students</a>
+            <a href="college_admin_gatepass.php">Gate Pass Approvals</a>
+            <a href="credentials_list.php">Login Credentials List</a>
+            <a href="admin_reports.php">System Reports</a>
+        </div>
+
+        <div class="content">
+            <h1>Principal Dashboard</h1>
+            <p>Full monitoring access for <strong><?php echo $_SESSION['college_type']; ?></strong>.</p>
+
+            <button class="logout-btn" onclick="window.location.href='logout.php'">
+                Logout
+            </button>
+        </div>
+
+    </div>
+
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+    <script>
+    function toggleSidebar() {
+        var sidebar = document.querySelector('.sidebar');
+        var overlay = document.getElementById('sidebarOverlay');
+        sidebar.classList.toggle('open');
+        if (overlay) overlay.classList.toggle('active');
+        document.body.classList.toggle('no-scroll');
+    }
+    function closeSidebar() {
+        var sidebar = document.querySelector('.sidebar');
+        var overlay = document.getElementById('sidebarOverlay');
+        sidebar.classList.remove('open');
+        if (overlay) overlay.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+    }
+    document.querySelectorAll('.sidebar a').forEach(function(link) {
+        link.addEventListener('click', closeSidebar);
+    });
+    var overlay = document.getElementById('sidebarOverlay');
+    if (overlay) overlay.addEventListener('click', closeSidebar);
+    </script>
+
+</body>
+
+</html>
